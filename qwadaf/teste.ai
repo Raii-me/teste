@@ -1,0 +1,14 @@
+var doc = app.documents.add();
+var rect = doc.pathItems.rectangle(500, 100, 300, 150);
+
+rect.filled = true;
+rect.fillColor = new RGBColor();
+rect.fillColor.red = 0;
+rect.fillColor.green = 120;
+rect.fillColor.blue = 255;
+
+rect.stroked = false;
+
+var text = doc.textFrames.add();
+text.contents = "Teste AI";
+text.position = [120, 420];

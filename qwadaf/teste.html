@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste HTML</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Calculadora</h2>
+    <input type="number" id="num" placeholder="Digite um número">
+    <button onclick="calcular()">Calcular</button>
+    <p id="resultado"></p>
+  </div>
+
+  <script>
+    function calcular() {
+      const n = parseInt(document.getElementById("num").value);
+      let soma = 0;
+      for(let i = 1; i <= n; i++) {
+        soma += i;
+      }
+      document.getElementById("resultado").innerText = "Resultado: " + soma;
+    }
+  </script>
+</body>
+</html>

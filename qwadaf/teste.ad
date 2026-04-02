@@ -1,0 +1,98 @@
+with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+
+procedure Sistema_Usuarios is
+
+   type Usuario is record
+      Id   : Integer;
+      Nome : String (1 .. 50);
+      Idade : Integer;
+   end record;
+
+   type Lista_Usuarios is array (1 .. 100) of Usuario;
+
+   Usuarios : Lista_Usuarios;
+   Total    : Integer := 0;
+
+   procedure Cadastrar is
+      Nome_Input  : String (1 .. 50);
+      Idade_Input : Integer;
+   begin
+      if Total < 100 then
+         Total := Total + 1;
+
+         Put("Digite o nome: ");
+         Get_Line(Nome_Input, Usuarios(Total).Nome'Length);
+
+         Put("Digite a idade: ");
+         Get(Idade_Input);
+
+         Usuarios(Total).Id := Total;
+         Usuarios(Total).Nome := Nome_Input;
+         Usuarios(Total).Idade := Idade_Input;
+
+         Put_Line("Usuario cadastrado com sucesso!");
+      else
+         Put_Line("Lista cheia!");
+      end if;
+   end Cadastrar;
+
+   procedure Listar is
+   begin
+      if Total = 0 then
+         Put_Line("Nenhum usuario cadastrado.");
+      else
+         for I in 1 .. Total loop
+            Put_Line("ID: " & Integer'Image(Usuarios(I).Id));
+            Put_Line("Nome: " & Usuarios(I).Nome);
+            Put_Line("Idade: " & Integer'Image(Usuarios(I).Idade));
+            Put_Line("----------------------");
+         end loop;
+      end if;
+   end Listar;
+
+   procedure Buscar is
+      Id_Busca : Integer;
+      Encontrado : Boolean := False;
+   begin
+      Put("Digite o ID para buscar: ");
+      Get(Id_Busca);
+
+      for I in 1 .. Total loop
+         if Usuarios(I).Id = Id_Busca then
+            Put_Line("Usuario encontrado:");
+            Put_Line("Nome: " & Usuarios(I).Nome);
+            Put_Line("Idade: " & Integer'Image(Usuarios(I).Idade));
+            Encontrado := True;
+         end if;
+      end loop;
+
+      if not Encontrado then
+         Put_Line("Usuario nao encontrado.");
+      end if;
+   end Buscar;
+
+   Opcao : Integer;
+
+begin
+   loop
+      Put_Line("===== MENU =====");
+      Put_Line("1 - Cadastrar");
+      Put_Line("2 - Listar");
+      Put_Line("3 - Buscar");
+      Put_Line("0 - Sair");
+      Put("Escolha: ");
+      Get(Opcao);
+
+      case Opcao is
+         when 1 => Cadastrar;
+         when 2 => Listar;
+         when 3 => Buscar;
+         when 0 => exit;
+         when others => Put_Line("Opcao invalida.");
+      end case;
+   end loop;
+
+   Put_Line("Encerrando sistema...");
+
+end Sistema_Usuarios;
